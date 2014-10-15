@@ -1,0 +1,46 @@
+/*
+	Realizado por: Juan Pablo Arias Zúñiga <jpaz199448@gmail.com>
+*/
+
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs'); 
+
+ 
+var setup;
+	
+$(function(){
+	setup = new setupApp();	   
+});
+
+function setupApp(){
+   // Create MVC objects
+   this.model = new Model();
+   this.view = new View();
+   this.controller = new Controller();
+   // Init model
+   this.model.add("#update", {});
+   // bind events (connect M-V-C)
+   this.triggerElement=$("ul > li,:not(.menu > li)");//$(document);
+   this.observe(this.view.locate("ul > li,:not(.menu > li)"), {"click": this.controller.clickHandler});
+   this.observe(this.triggerElement, {"update": this.model.updateHandler});
+   this.observe(this.triggerElement, {"render": this.view.render});
+   this.observe(this.view.locate("#auto"), {"click": this.controller.autoHandler});
+};
+setupApp.prototype.observe=function(observedElement, eventsActions){
+   $.each(eventsActions, function(event, action){
+      observedElement.on(event, action);
+   });
+};
+setupApp.prototype.trigger=function(name, e){
+    e = e  || {};
+    var event = $.Event(name);
+	$.extend(event, {targetName:e.targetName, targetValue:e.targetValue});
+	this.triggerElement.trigger(event);
+};
+setupApp.prototype.triggerRender=function(e){
+   this.trigger("render", e);
+};
+
+setupApp.prototype.triggerUpdate=function(e){
+   this.trigger("update", e);
+};
+

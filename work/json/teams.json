@@ -1,0 +1,108 @@
+{
+	_id:1,
+	nombre:"Deportivo Saprissa",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:2,
+	nombre:"Heredia",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:3,
+	nombre:"Alajuelense",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:4,
+	nombre:"UCR",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:5,
+	nombre:"Carmelita",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:6,
+	nombre:"Cartagines",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:7,
+	nombre:"Santos de Guapiles",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:8,
+	nombre:"Uruguay",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:9,
+	nombre:"Perez Zeledon",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:10,
+	nombre:"Limon",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:11,
+	nombre:"Belen",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}
+{
+	_id:12,
+	nombre:"Puntarenas",
+	win:0,
+	lose:0,
+	tie:0,
+	fav:0,
+	con:0
+}

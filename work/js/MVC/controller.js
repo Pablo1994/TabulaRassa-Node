@@ -1,0 +1,125 @@
+/*
+	Realizado por: Juan Pablo Arias Zúñiga <jpaz199448@gmail.com>
+*/
+
+// Controller
+function Controller(){
+  
+};
+Controller.prototype.clickHandler = function(e){
+	var eQuery= $(e.target);
+	var diag_id= eQuery.attr("id");
+	var service= "/bring?thing=";
+	switch(diag_id){
+		case "tablaOpc":
+		case "clas":
+		case "desc":
+			var url= service+"tabla";
+			var url2= service+"camp";
+			$.ajax({
+				url:url2,
+				dataType:"json",	
+				error: function(xhr, str, msg){
+					alert(str+"--"+msg.toString());
+				},
+				async:false	
+			}).done(function(data){
+				var camps= data.camps;
+				setup.triggerUpdate("camps",camps);		
+			});
+			$.ajax({
+				url:url,
+				dataType:"json",	
+				error: function(xhr, str, msg){
+					alert(str+"--"+msg.toString());
+				},
+				async:false	
+			}).done(function(data){
+				var teams= data.teams;	
+				setup.triggerUpdate("teams",teams,diag_id);		
+			});
+			break;			
+		case "goal":
+		case "goaled":
+			var url= service+"tabla";
+			$.ajax({
+				url:url,
+				dataType:"json",	
+				error: function(xhr, str, msg){
+					alert(str+"--"+msg.toString());
+				},
+				async:false	
+			}).done(function(data){
+				var teams= data.teams;	
+				setup.triggerUpdate("teams",teams,diag_id);		
+			});
+			google.load('visualization', '1.0', {'packages':['corechart']});
+  			google.setOnLoadCallback(setup.dataTable(diag_id));
+			break;
+	}
+};
+Controller.prototype.updateDB= function(eq1,eq2){
+	
+	var eqs= [eq1,eq2];
+	goles1= parseInt($("#team1").val());
+	goles2= parseInt($("#team2").val());
+	var equipo;
+	var j= 0;
+	while(j<2){
+		var url= "/update?equipo="
+		equipo={};
+		equipo=setup.model.buscaTeam(eqs[j]);
+		if(j==1){	
+			goles1= parseInt($("#team2").val());
+			goles2= parseInt($("#team1").val());
+		}
+		url=url+equipo.nombre;
+		if(!equipo) return;
+		var res= goles1 - goles2;
+			if(res>0){
+				equipo.win=parseInt(equipo.win)+1;
+			}
+			else if(res==0){
+				equipo.tie=parseInt(equipo.tie)+1;
+			}
+			else if(res<0){
+				equipo.lose=parseInt(equipo.lose)+1;
+			}
+		url=url+"&w="+equipo.win;
+		url=url+"&t="+equipo.tie;
+		url=url+"&l="+equipo.lose;
+		
+		if(goles1>0){
+			equipo.fav=parseInt(equipo.fav)+goles1;
+		}
+		url=url+"&f="+equipo.fav;
+		if(goles2>0){
+			equipo.con=parseInt(equipo.con)+goles2;
+			
+		}
+		url=url+"&c="+equipo.con;
+		$.ajax({
+			url:url,
+			dataType:"json",
+			error: function(xhr, str, msg){
+					alert(str+"--"+msg.toString());
+				},
+				async:false	
+			}).done(function(data){		
+			});
+		j++;
+	};
+		$.ajax({
+			url:"/bring?thing=tabla",
+			dataType:"json",
+			error: function(xhr, str, msg){
+					alert(str+"--"+msg.toString());
+				},
+				async:false	
+			}).done(function(data){
+				var teams= data.teams;	
+				setup.triggerUpdate("teams",teams);		
+			});
+};
+Controller.prototype.autoHandler = function(e){
+};

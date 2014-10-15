@@ -1,0 +1,132 @@
+<!-- Autor: Juan Pablo Arias Zúñiga, jpaz199448@gmail.com-->
+<html>
+  <head>
+    <title>Tabla de Equipos 2014</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="images/favi.png" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel= "stylesheet" type= "text/css" href= "css/style.css">
+    <script src= "_js/jquery-1.10.2.js"></script>
+    <link href="jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" 
+	 rel="stylesheet" />
+    <script src="jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" 
+	       type="text/javascript">
+		</script>
+    <script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="js/setup_lib_externas.js" type= "text/javascript"></script>
+    <script src="js/setupNoMVC.js" type= "text/javascript"></script>
+    <script src="js/setupMVC.js" type= "text/javascript"></script>
+    <script src="js/MVC/controller.js" type= "text/javascript"></script>
+    <script src="js/MVC/model.js" type= "text/javascript"></script>
+    <script src="js/MVC/view.js" type= "text/javascript"></script>
+  </head>
+  <body>
+    <div id= "container">
+	<header><div id="unafut"><a target="_blank" href="http://www.unafut.com/site/"><img src= "images/logo_unafut.jpg"></a></div>
+		<span id="titulo">Tabula Rassa</span>
+		<div id="cuadro"><a href="http://localhost:8085/tabula_rassa.html">Home</a><a>Nosotros</a><a>Servicios</a>		
+				<a href="mailto:jpaz199448@gmail.com">Contacto</a></div>
+		<!--<form id= "login" action= "/login" method= "post">Correo: <input type= "email" name= "correo" id= "correo" required/>Contraseña: 				<input type= "password" name= "contrasena" id= "contrasena" required/><input type= "submit" value= "Entrar"/></form>-->
+		<button type= "button" id="webmstr"><img id="sap" src= "images/saprissa.jpg"></button>
+		<div id="dialogWM" class="ui-dialog-content ui-widget-content ui-helper-hidden dialog" style="width: auto; min-height: 0px; max-height: none; height: 106px;">
+			<label id= "lab"></label>
+		</div>
+		<div id="dialog" title="Set score">
+		  <form>
+			  <fieldset>
+				<label id="label1" for="team1">Team1</label>
+				<input type="number" value="0" max="10" 
+				       name="team1" id="team1" 
+					   class="text ui-widget-content ui-corner-all"/>
+				<br/>
+				<label id="label2" for="team2">Team2</label>
+				<input type="number" value="0" max="10"
+				       name="team2" id="team2" 
+					   class="text ui-widget-content ui-corner-all"/>
+			  </fieldset>
+		  </form>
+	    	</div>
+	</header>
+	<div id= "wrapper">
+	<div id= "extra">
+		<h1>Funciones</h1>
+		<ul class="menu">
+    			<li> Tabla
+				<ul > 
+					<li class= "opcFunc" id= "tablaOpc"> Ver </li>
+					<li class= "opcFunc" id= "clas"> Clasificados </li>
+					<li class= "opcFunc" id= "desc"> Descienden </li>
+				</ul>
+			</li>
+    			<li> Gráficas
+				<ul>
+					<li class= "opcFunc" id="goal"> Equipos Goleadores</li>
+				    	<li class= "opcFunc" id="goaled"> Los más Goleados</li>
+				</ul> 
+			</li>
+		</ul>
+	</div>
+	<div id= "content">
+		<ul class="menuTabs">
+    			<li> Campeonatos
+				<ul> 
+					<li> Crear </li>
+					<li> Modificar </li>
+					<li> Eliminar </li>
+				</ul>
+			</li>
+    			<li> Jornadas
+				<ul>
+					<li> Generar </li>
+					<li> Crear </li>
+					<li> Modificar </li>
+					<li> Eliminar </li>
+				</ul> 
+			</li>
+			<li> Equipos
+				<ul>
+					<li> Crear </li>
+					<li> Modificar </li>
+					<li> Eliminar </li>
+				</ul> 
+			</li>
+		</ul>
+		<div id="chart_div"></div>
+		<table id="tabla">
+			<thead id="datah">
+				<td>Equipo</td>
+				<td>PJ</td>
+				<td>PG</td>
+				<td>PP</td>
+				<td>PE</td>
+				<td>GF</td>
+				<td>GC</td>
+				<td>DG</td>
+				<td>Pt.</td>
+			</thead>
+			<tbody></tbody>
+		</table><br/>
+		
+		
+	</div>
+ 	<div id= "navigation">
+		<h1>Mis Links</h1>
+		<div id= "espacioLinks">
+			<ul>
+				<li><a href= "http://www.saprissa.cr" target="_blank">Deportivo Saprissa</a></li>
+				<li><a href= "http://www.liverpoolfc.com" target="_blank">Liverpool FC</a></li>
+				<li><a href= "http://www.inter.it/es/hp" target="_blank">Inter de Milán</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	</div>
+	
+	<footer>
+		<a href="https://twitter.com/ariasPabl0" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @ariasPabl0</a>
+		<div id= "contacto">Desarrollado por: Pablo Arias WebDevelopment &reg; <a href="mailto:jpaz199448@gmail.com">Contrataciones</a></div>
+	</footer>
+    </div>
+  </body>
+</html>

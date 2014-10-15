@@ -1,0 +1,112 @@
+/*
+	Realizado por: Juan Pablo Arias Zúñiga <jpaz199448@gmail.com>
+*/
+
+var teamsLabs=["#label1", "#label2"];
+var currentLab=0;
+function select_team(target){
+	var d = $("#dialog");
+	$(teamsLabs[currentLab]).html(target.parent().get(0).children[0].innerHTML);
+	var val1=$(teamsLabs[0]).html();
+	var val2=$(teamsLabs[1]).html();
+	if(currentLab==1 && val1!=val2){
+		currentLab=0;
+		$("#team1").val(0);
+		$("#team2").val(0);
+		d.dialog("open");
+	}else
+	    currentLab=1;
+};
+function sort_data(e){
+  // e es el evento: e.target dice el objeto destino del evento
+    var target = e.target;
+  // Subimos hasta encontrar el tHead. Asumimos el evento ocurre en la tabla y tiene tHead
+    var p=$(target).parent().get(0);
+    // for(;p&&p.tagName!="THEAD";)p=$(p).parent().get(0);
+    loop: while(p){
+      switch(p.tagName){
+        case "THEAD" : break loop;
+        case "TBODY" : select_team($(target)); return;
+		case "SPAN"  : break;
+        case "TR"    : break;
+      };
+       p=$(p).parent().get(0);
+    };
+  // Sino encontro tHead no se sigue
+    if(!p) return;
+    p=p.children[0]; //thead tiene solo un hijo
+  // Si lo hemos visitado cambiamos de signo (afecta la comparacion)
+    if(target.visited){
+     target.visited*=-1;
+    }else{
+      target.visited=1;
+    }
+  // Buscamos cual columna recibio el evento. Es la variable col
+    var col=0, n=p.children.length;
+    for(;col<n && p.children[col]!=target;col++)
+  // Accedemos las filas
+    var tb = this.tBodies[0];
+    var ch = tb.rows;
+  // Ponemos las filas en un arreglo
+    var a = [];
+    for(var i=0;i<ch.length;i++){
+      a[i]=ch[i];
+    }
+    // Ordenamos como arreglo comparando por la columna col
+    /* NOTA:
+     Seria MUCHO mas eficiente extraer a priori. Ahora cada vez que se llama a la funcion se hacen las extracciones y conversiones
+    */
+    a.sort(function(x, y){ 
+       var a = x.cells[col].innerHTML, 
+           b = y.cells[col].innerHTML;
+       if(!isNaN(a) && !isNaN(b)){
+         a=parseFloat(a);
+         b=parseFloat(b);
+       };
+       // Si ha sido visitado cambiamos de signo sino dejamos igual
+       if(a>b) return target.visited;
+       if(a<b) return -target.visited;
+       return 0;
+    });
+    // Copiamos del arreglo a la tabla de nuevo.
+    for(var i=0;i<a.length;i++){
+      tb.appendChild(a[i]);
+    };
+		
+};
+$(function(){
+    	$("#tabla").click(sort_data); 
+	var d = $("#dialog");
+	d.dialog({
+		  autoOpen: false,
+		  height:250,
+		  width: 350,
+		  modal: true,
+		  buttons: {
+		    "Accept": function(){ //Accept
+			   var eq1= $("#label1").html();
+			   var eq2= $("#label2").html();
+			   setup.updateDB(eq1,eq2);
+			   $( this ).dialog("close");
+			},
+			"Reset": function(){//Reset
+			},
+			"Cancel": function() {//Cancel
+			  $( this ).dialog("close");
+			}
+		  },
+		  close: function() {
+		     $( this ).dialog( "close" );
+		  }
+	});
+	var dwm= $("#dialogWM");
+
+	$("#dialogWM").dialog({
+		  autoOpen: false,
+		  height:305,
+		  width: 400,
+		  modal: true,
+	});
+	
+	$("#webmstr").click(function(){$("#dialogWM").dialog("open")});
+});
